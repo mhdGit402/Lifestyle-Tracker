@@ -13,4 +13,9 @@ class Item extends Model
         'title',
         'lifestyle_id'
     ];
+
+    public function lifestyle()
+    {
+        return $this->belongsTo(lifestyle::class);
+    }
 }

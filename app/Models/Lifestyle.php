@@ -13,6 +13,12 @@ class Lifestyle extends Model
         'title',
         'start_date',
         'end_date',
-        'user_id'
+        'user_id',
+        'items'
     ];
+
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
 }

@@ -29,7 +29,16 @@ class LifestyleController extends Controller
      */
     public function store(StoreLifestyleRequest $request)
     {
-        Lifestyle::create($request->validated());
+        // Create the model instance with the validated data, excluding 'items'
+        $lifestyle = Lifestyle::create(array_diff_key($request->validated(), ['items' => null]));
+
+        // Prepare items data for bulk insertion
+        $itemsData = collect($request->validated('items'))->map(function ($item) use ($lifestyle) {
+            return array_merge($item, ['lifestyle_id' => $lifestyle->id]);
+        });
+
+        // Bulk insert items
+        $lifestyle->items()->createMany($itemsData);
     }
 
     /**
