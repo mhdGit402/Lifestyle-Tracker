@@ -105,6 +105,23 @@ export default function Lifestyle({ auth, items }) {
                                                                 <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
                                                                     <Link
                                                                         href={route(
+                                                                            "lifestyle.show",
+                                                                            {
+                                                                                lifestyle:
+                                                                                    item,
+                                                                            }
+                                                                        )}
+                                                                    >
+                                                                        <button
+                                                                            type="button"
+                                                                            className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-green-600 hover:text-green-800 focus:outline-none focus:text-green-800 disabled:opacity-50 disabled:pointer-events-none dark:text-green-500 dark:hover:text-green-400 dark:focus:text-green-400"
+                                                                        >
+                                                                            View
+                                                                        </button>
+                                                                    </Link>
+                                                                    |
+                                                                    <Link
+                                                                        href={route(
                                                                             "lifestyle.edit",
                                                                             {
                                                                                 lifestyle:

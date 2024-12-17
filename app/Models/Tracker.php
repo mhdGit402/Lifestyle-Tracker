@@ -14,4 +14,9 @@ class Tracker extends Model
         'items',
         'lifestyle_id',
     ];
+
+    public function lifestyle()
+    {
+        return $this->belongsTo(Lifestyle::class);
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Item;
 use App\Models\Lifestyle;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,11 +19,19 @@ class TrackerFactory extends Factory
     public function definition(): array
     {
         $lifestyle = Lifestyle::pluck('id');
+        $items =  Item::pluck('id')->toArray();
+
+        $fakeItems = array_map(function ($item) {
+            return [
+                collect($item)->random() => fake()->boolean() // Random true/false
+            ];
+        }, $items);
+
         // Generate a fake object with dynamic keys and random boolean values
-        $fakeItems = [];
-        for ($i = 1; $i <= 5; $i++) { // Adjust the number of items as needed
-            $fakeItems['item' . $i] = $this->faker->boolean(); // Random true/false
-        }
+        // $fakeItems = [];
+        // for ($i = 1; $i <= 5; $i++) { // Adjust the number of items as needed
+        //     $fakeItems[$items->random()] = $this->faker->boolean(); // Random true/false
+        // }
 
         return [
             "submitted_date" => fake()->dateTimeBetween("now", "+1 year"),

@@ -21,4 +21,9 @@ class Lifestyle extends Model
     {
         return $this->hasMany(Item::class);
     }
+
+    public function trackers()
+    {
+        return $this->hasMany(Tracker::class);
+    }
 }
