@@ -19,4 +19,9 @@ class Tracker extends Model
     {
         return $this->belongsTo(Lifestyle::class);
     }
+
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
 }

@@ -58,6 +58,7 @@ class LifestyleController extends Controller
         return inertia("Lifestyle/Edit", ["lifestyle" => $lifestyle->load('items')]);
     }
 
+    /* Approach 1 */
     /**
      * Update the specified resource in storage.
      */
@@ -89,6 +90,7 @@ class LifestyleController extends Controller
     //     $lifestyle->items()->upsert($itemsData, uniqueBy: ['id'], update: ['title']);
     // }
 
+    /* Approach 2 */
     public function update(UpdateLifestyleRequest $request, Lifestyle $lifestyle)
     {
         // Step 1: Update the lifestyle model with validated data, excluding 'items'

@@ -11,7 +11,7 @@ class StoreTrackerRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class StoreTrackerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "submitted_date" => "required|date|after_or_equal:today",
+            "items" => "required|array",
+            "lifestyle_id" => "required|exists:lifestyles,id"
         ];
     }
 }

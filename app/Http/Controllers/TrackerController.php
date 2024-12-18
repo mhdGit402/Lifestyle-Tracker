@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tracker;
 use App\Http\Requests\StoreTrackerRequest;
 use App\Http\Requests\UpdateTrackerRequest;
+use App\Models\Lifestyle;
 
 class TrackerController extends Controller
 {
@@ -29,15 +30,26 @@ class TrackerController extends Controller
      */
     public function store(StoreTrackerRequest $request)
     {
-        //
+        // Convert the items array to a JSON string
+        $validatedData = $request->validated();
+        $validatedData['items'] = json_encode($validatedData['items']);
+
+        // Create a new Tracker record with the validated data
+        Tracker::create($validatedData);
+
+        // Retrieve the lifestyle with its relationships
+        $lifestyle = Lifestyle::with(['items', 'trackers'])
+            ->findOrFail($validatedData['lifestyle_id']);
+
+        return inertia("Lifestyle/View", ["lifestyle" => $lifestyle]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Tracker $tracker)
+    public function show(Lifestyle $tracker)
     {
-        //
+        return inertia("Tracker/Create", ["lifestyle" => $tracker->load("items")]);
     }
 
     /**
