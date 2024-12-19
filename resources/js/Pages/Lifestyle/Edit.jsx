@@ -8,8 +8,12 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import { Transition } from "@headlessui/react";
 import { LuDelete } from "react-icons/lu";
 import { CiSquarePlus } from "react-icons/ci";
+import { FaRegEdit } from "react-icons/fa";
+import { useState } from "react";
 
 export default function EditLifestyle({ auth, lifestyle }) {
+    const [isEditable, setIsEditable] = useState(true);
+    const { delete: destroy } = useForm({});
     const { data, setData, put, processing, errors, recentlySuccessful } =
         useForm({
             title: lifestyle.title,
@@ -34,6 +38,17 @@ export default function EditLifestyle({ auth, lifestyle }) {
     // Add a new dynamic field
     const addItem = () => {
         setData("items", [...data.items, { title: "" }]);
+    };
+
+    const editItem = () => {
+        if (
+            confirm("All your trackers and streak will be reset. Are you sure?")
+        ) {
+            setIsEditable(!isEditable);
+            destroy(route("tracker.destroy", lifestyle.id), {
+                preserveScroll: true,
+            });
+        }
     };
 
     // Remove a dynamic field
@@ -153,8 +168,16 @@ export default function EditLifestyle({ auth, lifestyle }) {
                                                 type="button"
                                                 onClick={addItem}
                                                 className="flex items-center justify-center"
+                                                disabled={isEditable}
                                             >
                                                 <CiSquarePlus className="text-blue-500 w-8 h-8 hover:text-blue-700 transition duration-200" />
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={editItem}
+                                                className="flex items-center justify-center"
+                                            >
+                                                <FaRegEdit className="text-blue-500 w-8 h-8 hover:text-blue-700 transition duration-200" />
                                             </button>
                                         </div>
                                         <InputError
@@ -177,6 +200,7 @@ export default function EditLifestyle({ auth, lifestyle }) {
                                                             e.target.value
                                                         )
                                                     }
+                                                    disabled={isEditable}
                                                 />
                                                 <button
                                                     type="button"
@@ -184,6 +208,7 @@ export default function EditLifestyle({ auth, lifestyle }) {
                                                         removeItem(index)
                                                     }
                                                     className="flex items-center justify-center"
+                                                    disabled={isEditable}
                                                 >
                                                     <LuDelete className="text-red-500 w-8 h-8 hover:text-red-700 transition duration-200" />
                                                 </button>

@@ -21,7 +21,7 @@ class LifestylePolicy
      */
     public function view(User $user, Lifestyle $lifestyle): bool
     {
-        //
+        return $lifestyle->user_id === $user->id;
     }
 
     /**
@@ -37,7 +37,7 @@ class LifestylePolicy
      */
     public function update(User $user, Lifestyle $lifestyle): bool
     {
-        //
+        return $lifestyle->user_id === $user->id;
     }
 
     /**
@@ -45,7 +45,7 @@ class LifestylePolicy
      */
     public function delete(User $user, Lifestyle $lifestyle): bool
     {
-        //
+        return $lifestyle->user_id === $user->id;
     }
 
     /**

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Lifestyle;
 use App\Http\Requests\StoreLifestyleRequest;
 use App\Http\Requests\UpdateLifestyleRequest;
-use App\Models\Item;
+use Illuminate\Support\Facades\Cache;
 
 class LifestyleController extends Controller
 {
@@ -14,7 +14,11 @@ class LifestyleController extends Controller
      */
     public function index()
     {
-        return inertia('Lifestyle', ['items' => Lifestyle::with('items')->get()]);
+        $cacheKey = "user.lifestyle" . auth()->id();
+        $lifestyle = Cache::remember($cacheKey, 15, function () {
+            return Lifestyle::with('items')->whereBelongsTo(auth()->user())->get();
+        });
+        return inertia('Lifestyle', ['items' => $lifestyle]);
     }
 
     /**
@@ -47,6 +51,7 @@ class LifestyleController extends Controller
      */
     public function show(Lifestyle $lifestyle)
     {
+        $this->authorize("view", $lifestyle);
         return inertia("Lifestyle/View", ["lifestyle" => $lifestyle->load(['items', 'trackers'])]);
     }
 
@@ -55,6 +60,7 @@ class LifestyleController extends Controller
      */
     public function edit(Lifestyle $lifestyle)
     {
+        $this->authorize("view", $lifestyle);
         return inertia("Lifestyle/Edit", ["lifestyle" => $lifestyle->load('items')]);
     }
 
@@ -93,6 +99,8 @@ class LifestyleController extends Controller
     /* Approach 2 */
     public function update(UpdateLifestyleRequest $request, Lifestyle $lifestyle)
     {
+        $this->authorize("update", $lifestyle);
+
         // Step 1: Update the lifestyle model with validated data, excluding 'items'
         $this->updateLifestyle($lifestyle, $request->validated());
 
@@ -151,6 +159,7 @@ class LifestyleController extends Controller
      */
     public function destroy(Lifestyle $lifestyle)
     {
+        $this->authorize("delete", $lifestyle);
         $lifestyle->delete();
     }
 }

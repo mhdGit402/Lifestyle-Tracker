@@ -73,6 +73,6 @@ class TrackerController extends Controller
      */
     public function destroy(Tracker $tracker)
     {
-        //
+        Tracker::where("lifestyle_id", $tracker->id)->delete();
     }
 }
