@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('lifestyles', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->datetime('start_date');
-            $table->datetime('end_date');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

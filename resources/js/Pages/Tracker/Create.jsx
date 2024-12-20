@@ -1,10 +1,10 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import InputLabel from "@/Components/InputLabel";
-import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import { useForm } from "@inertiajs/react";
 import PrimaryButton from "@/Components/PrimaryButton";
+import { DatePicker } from "@/components/DatePicker";
 
 export default function CreateTracker({ auth, lifestyle }) {
     // Initialize defaultItems as an object
@@ -19,8 +19,21 @@ export default function CreateTracker({ auth, lifestyle }) {
         lifestyle_id: lifestyle.id,
     });
 
-    const handleChange = (e) => {
-        setData(e.target.name, e.target.value);
+    const handleDate = (e) => {
+        const dateString = e.date;
+
+        // Create a Date object from the date string
+        const date = new Date(dateString);
+
+        // Extract year, month, and day
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are 0-indexed
+        const day = String(date.getDate()).padStart(2, "0");
+
+        // Format the date as YYYY/MM/DD
+        const formattedDate = `${year}/${month}/${day}`;
+
+        setData(e.name, formattedDate);
     };
 
     // Handle checkbox change
@@ -76,17 +89,14 @@ export default function CreateTracker({ auth, lifestyle }) {
                                             htmlFor="submitted_date"
                                             value="Submitted date"
                                         />
-                                        <TextInput
+                                        <DatePicker
                                             id="submitted_date"
                                             name="submitted_date"
-                                            className="mt-1 block w-full"
                                             value={data.submitted_date}
-                                            onChange={(e) => {
-                                                handleChange(e);
-                                            }}
+                                            onChange={handleDate}
                                             required
                                             isFocused
-                                            autoComplete="end_date"
+                                            autoComplete="submitted_date"
                                         />
                                         <InputError
                                             className="mt-2"

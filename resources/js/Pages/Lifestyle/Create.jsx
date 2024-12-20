@@ -8,6 +8,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import { Transition } from "@headlessui/react";
 import { LuDelete } from "react-icons/lu";
 import { CiSquarePlus } from "react-icons/ci";
+import { DatePicker } from "@/components/DatePicker";
 
 export default function CreateLifestyle({ auth }) {
     const {
@@ -25,6 +26,23 @@ export default function CreateLifestyle({ auth }) {
         user_id: auth.user.id,
         items: [{ title: "" }], // Dynamic fields for Table 2 (Items)
     });
+
+    const handleDate = (e) => {
+        const dateString = e.date;
+
+        // Create a Date object from the date string
+        const date = new Date(dateString);
+
+        // Extract year, month, and day
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are 0-indexed
+        const day = String(date.getDate()).padStart(2, "0");
+
+        // Format the date as YYYY/MM/DD
+        const formattedDate = `${year}/${month}/${day}`;
+
+        setData(e.name, formattedDate);
+    };
 
     // Handle changes for static fields
     const handleChange = (e) => {
@@ -114,14 +132,11 @@ export default function CreateLifestyle({ auth }) {
                                             htmlFor="start_date"
                                             value="Start date"
                                         />
-                                        <TextInput
+                                        <DatePicker
                                             id="start_date"
                                             name="start_date"
-                                            className="mt-1 block w-full"
                                             value={data.start_date}
-                                            onChange={(e) => {
-                                                handleChange(e);
-                                            }}
+                                            onChange={handleDate}
                                             required
                                             isFocused
                                             autoComplete="start_date"
@@ -137,14 +152,11 @@ export default function CreateLifestyle({ auth }) {
                                             htmlFor="end_date"
                                             value="End date"
                                         />
-                                        <TextInput
+                                        <DatePicker
                                             id="end_date"
                                             name="end_date"
-                                            className="mt-1 block w-full"
                                             value={data.end_date}
-                                            onChange={(e) => {
-                                                handleChange(e);
-                                            }}
+                                            onChange={handleDate}
                                             required
                                             isFocused
                                             autoComplete="end_date"

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('trackers', function (Blueprint $table) {
             $table->id();
-            $table->datetime('submitted_date');
+            $table->date('submitted_date');
             $table->json('items');
             $table->foreignId('lifestyle_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
