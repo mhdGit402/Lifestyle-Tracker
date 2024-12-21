@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             LifestyleSeeder::class,
             ItemSeeder::class,
             TrackerSeeder::class,
-            StreakSeeder::class
+            // StreakSeeder::class
         ]);
     }
 }

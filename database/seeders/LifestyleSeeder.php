@@ -13,6 +13,6 @@ class LifestyleSeeder extends Seeder
      */
     public function run(): void
     {
-        Lifestyle::factory(10)->create();
+        Lifestyle::factory(1000)->create();
     }
 }

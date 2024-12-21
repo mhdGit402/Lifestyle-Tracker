@@ -13,6 +13,6 @@ class TrackerSeeder extends Seeder
      */
     public function run(): void
     {
-        Tracker::factory(20)->create();
+        Tracker::factory(2000)->create();
     }
 }

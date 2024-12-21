@@ -21,11 +21,15 @@ class TrackerFactory extends Factory
         $lifestyle = Lifestyle::pluck('id');
         $items =  Item::pluck('id')->toArray();
 
+        // Limit to only 3 items
+        $limitedItems = array_slice($items, 0, 3);
+
         $fakeItems = array_map(function ($item) {
             return [
-                collect($item)->random() => fake()->boolean() // Random true/false
+                // collect($item)->random() => fake()->boolean() // Random true/false
+                collect($item)->random() => true // Random true/false
             ];
-        }, $items);
+        }, $limitedItems);
 
         // Generate a fake object with dynamic keys and random boolean values
         // $fakeItems = [];
