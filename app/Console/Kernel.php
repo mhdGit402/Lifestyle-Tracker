@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->job(new HandleStreakJob)->daily(); // Run at midnight
+        // $schedule->job(new HandleStreakJob)->everyThirtySeconds(); // For Dev testing
     }
 
     /**

@@ -37,6 +37,16 @@ export default function Authenticated({ user, header, children }) {
                                     Lifestyle
                                 </NavLink>
                             </div>
+                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <NavLink
+                                    href={route("profile.show", {
+                                        profile: user,
+                                    })}
+                                    active={route().current("profile.*")}
+                                >
+                                    Profile
+                                </NavLink>
+                            </div>
                         </div>
 
                         <div className="hidden sm:flex sm:items-center sm:ms-6">
@@ -68,7 +78,9 @@ export default function Authenticated({ user, header, children }) {
 
                                     <Dropdown.Content>
                                         <Dropdown.Link
-                                            href={route("profile.edit")}
+                                            href={route("profile.edit", {
+                                                profile: user.id,
+                                            })}
                                         >
                                             Profile
                                         </Dropdown.Link>
@@ -141,6 +153,22 @@ export default function Authenticated({ user, header, children }) {
                             Dashboard
                         </ResponsiveNavLink>
                     </div>
+                    <div className="pt-2 pb-3 space-y-1">
+                        <ResponsiveNavLink
+                            href={route("lifestyle.index")}
+                            active={route().current("lifestyle.*")}
+                        >
+                            Lifestyle
+                        </ResponsiveNavLink>
+                    </div>
+                    <div className="pt-2 pb-3 space-y-1">
+                        <ResponsiveNavLink
+                            href={route("profile.show", { profile: user })}
+                            active={route().current("profile.*")}
+                        >
+                            Profile
+                        </ResponsiveNavLink>
+                    </div>
 
                     <div className="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
                         <div className="px-4">
@@ -153,7 +181,11 @@ export default function Authenticated({ user, header, children }) {
                         </div>
 
                         <div className="mt-3 space-y-1">
-                            <ResponsiveNavLink href={route("profile.edit")}>
+                            <ResponsiveNavLink
+                                href={route("profile.edit", {
+                                    profile: user.id,
+                                })}
+                            >
                                 Profile
                             </ResponsiveNavLink>
                             <ResponsiveNavLink

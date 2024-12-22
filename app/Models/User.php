@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Lifestyle::class);
     }
+
+    public function streaks()
+    {
+        return $this->hasMany(Streak::class);
+    }
 }
