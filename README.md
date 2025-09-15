@@ -96,8 +96,8 @@ Then open your browser at http://localhost:8000 (or whatever port Laravel uses) 
 
 Contributions are welcome! Please fork the repository and submit a pull request for any enhancements or bug fixes.
 
-### License
+## License
 This project is licensed under the [MIT](https://choosealicense.com/licenses/mit/) License. See the LICENSE file for details.
 
-### Contact
+## Contact
 Created by [@mhdGit402](https://github.com/mhdGit402/)
