@@ -100,4 +100,4 @@ Contributions are welcome! Please fork the repository and submit a pull request 
 This project is licensed under the [MIT](https://choosealicense.com/licenses/mit/) License. See the LICENSE file for details.
 
 ### Contact
-Maintained by @mhdGit402
+Maintained by [@mhdGit402](https://github.com/mhdGit402/)
