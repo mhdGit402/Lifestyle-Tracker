@@ -20,8 +20,8 @@ A web app to help you stay on track, motivated, and maintain healthy lifestyle h
 ## Features
 
 - Track daily habits or lifestyle goals  
-- Motivational UI / reminders (if implemented)  
-- Analytics or summary of your activity over time (if available)  
+- Motivational UI / reminders
+- Analytics or summary of your activity over time
 - User-friendly web interface  
 
 ---
@@ -32,7 +32,7 @@ A web app to help you stay on track, motivated, and maintain healthy lifestyle h
 |---|---|
 | Backend | PHP, Laravel framework |
 | Frontend | JavaScript, Tailwind CSS, Vite |
-| Database | MySQL (or whatever database specified in `.env`) |
+| Database | MySQL |
 | Testing | PHPUnit |
 | Other tools | Composer, NPM |  
 
@@ -92,25 +92,12 @@ Make sure you have installed:
 
 Then open your browser at http://localhost:8000 (or whatever port Laravel uses) to see the app.
 
-### Contributing
-If you’d like to contribute:
-1. Fork the repo
-2. Create a new branch:
-   ```bash
-   git checkout -b feature/YourFeature
-   
-3. Make your changes and commit:
-    ```bash
-    git commit -m "Add some feature"
+## Contributing
 
-4. Push your branch:
-    ```bash
-    git push origin feature/YourFeature
-
-5. Open a Pull Request
+Contributions are welcome! Please fork the repository and submit a pull request for any enhancements or bug fixes.
 
 ### License
-This project is licensed under the MIT License
+This project is licensed under the [MIT](https://choosealicense.com/licenses/mit/) License. See the LICENSE file for details.
 
 ### Contact
 Maintained by @mhdGit402
